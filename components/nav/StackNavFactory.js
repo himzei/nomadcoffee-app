@@ -9,6 +9,7 @@ import Feed from "../../screens/Feed";
 import { Image } from "react-native";
 import { isLoggedInVar } from "../../apollo";
 import { useReactiveVar } from "@apollo/client";
+import Login from "../../screens/Login";
 
 const Stack = createStackNavigator();
 
@@ -42,12 +43,16 @@ export default function StackNavFactory({ screenName }) {
       {screenName === "Search" ? (
         <Stack.Screen name={"Search"} component={Search} />
       ) : null}
-      {screenName === "Notification" ? (
+
+      {screenName === "Notifications" ? (
         <Stack.Screen name={"Notifications"} component={Notifications} />
       ) : null}
-      {screenName === "Me" ? <Stack.Screen name={"Me"} component={Me} /> : null}
 
-      <Stack.Screen name="Profile" component={Profile} />
+      {screenName === "Me" ? (
+        <Stack.Screen name={"Me"} component={isLoggedIn ? Me : Login} />
+      ) : null}
+
+      <Stack.Screen name="Profile" component={isLoggedIn ? Profile : Login} />
       <Stack.Screen name="Photo" component={Photo} />
     </Stack.Navigator>
   );

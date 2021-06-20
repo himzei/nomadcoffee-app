@@ -26,6 +26,7 @@ export default function LoggedOutNav() {
       >
         {() => <StackNavFactory screenName="Feed" />}
       </Tabs.Screen>
+
       <Tabs.Screen
         name="Search"
         options={{
@@ -36,8 +37,9 @@ export default function LoggedOutNav() {
       >
         {() => <StackNavFactory screenName="Search" />}
       </Tabs.Screen>
+
       <Tabs.Screen
-        name="Notifications"
+        name="not"
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <TabIcon iconName={"heart"} color={color} focused={focused} />
@@ -46,6 +48,7 @@ export default function LoggedOutNav() {
       >
         {() => <StackNavFactory screenName="Notifications" />}
       </Tabs.Screen>
+
       <Tabs.Screen
         name="Me"
         options={{

@@ -6,13 +6,11 @@ export default function Notifications() {
     <View
       style={{
         flex: 1,
-        backgroundColor: "black",
+        justifyContent: "center",
         alignItems: "center",
-        justifyContent: "center'",
-        height: 100,
       }}
     >
-      <Text style={{ color: "white", fontSize: 20 }}>Notifications</Text>
+      <Text style={{ fontSize: 20 }}>Notifications</Text>
     </View>
   );
 }

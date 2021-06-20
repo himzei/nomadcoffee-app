@@ -28,14 +28,13 @@ const FEED_QUERY = gql`
 
 export default function Feed({ navigation }) {
   const { data } = useQuery(FEED_QUERY);
-  console.log(data);
+
   return (
     <View
       style={{
         flex: 1,
+        justifyContent: "center",
         alignItems: "center",
-        justifyContent: "center'",
-        height: 100,
       }}
     >
       <Text style={{ fontSize: 20 }}>Home</Text>

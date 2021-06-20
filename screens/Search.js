@@ -6,10 +6,8 @@ export default function Search({ navigation }) {
     <View
       style={{
         flex: 1,
-
+        justifyContent: "center",
         alignItems: "center",
-        justifyContent: "center'",
-        height: 100,
       }}
     >
       <TouchableOpacity onPress={() => navigation.navigate("Profile")}>

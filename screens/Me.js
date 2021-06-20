@@ -1,39 +1,15 @@
-import React from "react";
-import { useReactiveVar, gql, useQuery } from "@apollo/client";
-import { View, Text, TouchableOpacity } from "react-native";
-import styled from "styled-components/native";
-import { isLoggedInVar, tokenVar } from "../apollo";
-import LogInNav from "../navigators/LogInNav";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { View, Text } from "react-native";
+import useMe from "../hooks/useMe";
 
-const SEE_PROFILE_QUERY = gql`
-  query seeProfile($username: String!) {
-    seeProfile(username: $username) {
-      username
-      email
-      name
-      location
-      avatarURL
-      githubUsername
-      isMe
-    }
-  }
-`;
+export default function Me({ navigation }) {
+  const data = useMe();
 
-const LogInForm = styled.View`
-  width: 100%;
-  height: 100%;
-`;
-
-export default function Me({ route }) {
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
-  console.log(route);
-
-  // const { data } = useQuery(SEE_PROFILE_QUERY, {
-  //   variables: {
-  //     username,
-  //   },
-  // });
+  useEffect(() => {
+    navigation.setOptions({
+      title: data?.me?.username,
+    });
+  }, []);
 
   return (
     <View
@@ -43,13 +19,6 @@ export default function Me({ route }) {
         alignItems: "center",
       }}
     >
-      {isLoggedIn ? (
-        <Text>hello</Text>
-      ) : (
-        <LogInForm>
-          <LogInNav />
-        </LogInForm>
-      )}
       <Text style={{ fontSize: 20 }}>Me</Text>
     </View>
   );
