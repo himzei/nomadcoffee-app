@@ -10,6 +10,7 @@ import { Image } from "react-native";
 import { isLoggedInVar } from "../../apollo";
 import { useReactiveVar } from "@apollo/client";
 import Login from "../../screens/Login";
+import Comments from "../../screens/Comments";
 
 const Stack = createStackNavigator();
 
@@ -54,6 +55,7 @@ export default function StackNavFactory({ screenName }) {
 
       <Stack.Screen name="Profile" component={isLoggedIn ? Profile : Login} />
       <Stack.Screen name="Photo" component={Photo} />
+      <Stack.Screen name="Comments" component={Comments} />
     </Stack.Navigator>
   );
 }

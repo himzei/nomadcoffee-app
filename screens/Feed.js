@@ -1,11 +1,12 @@
 import { gql, useQuery } from "@apollo/client";
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { logUserOut } from "../apollo";
+import React, { useState } from "react";
+import { FlatList } from "react-native";
+import ScreenLayout from "../components/ScreenLayout";
+import Shop from "../components/Shop";
 
 const FEED_QUERY = gql`
-  query seeCoffeeShops {
-    seeCoffeeShops {
+  query seeCoffeeShops($lastId: Int!) {
+    seeCoffeeShops(lastId: $lastId) {
       id
       name
       latitude
@@ -26,21 +27,43 @@ const FEED_QUERY = gql`
   }
 `;
 
-export default function Feed({ navigation }) {
-  const { data } = useQuery(FEED_QUERY);
+export default function Feed() {
+  const [lastId, setLastId] = useState(0);
 
+  const { data, loading, refetch, fetchMore } = useQuery(FEED_QUERY, {
+    variables: {
+      lastId: 0,
+    },
+  });
+
+  const renderShop = ({ item: shop }) => {
+    return <Shop {...shop} />;
+  };
+  const refresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
+  const [refreshing, setRefreshing] = useState(false);
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text style={{ fontSize: 20 }}>Home</Text>
-      <TouchableOpacity onPress={logUserOut}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
-    </View>
+    <ScreenLayout loading={loading}>
+      <FlatList
+        onEndReachedThreshold={0.5}
+        onEndReached={() =>
+          fetchMore({
+            variables: {
+              lastId: data?.seeCoffeeShops?.length,
+            },
+          })
+        }
+        refreshing={refreshing}
+        onRefresh={refresh}
+        style={{ width: "100%" }}
+        data={data?.seeCoffeeShops}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(shop) => "" + shop.id}
+        renderItem={renderShop}
+      />
+    </ScreenLayout>
   );
 }
