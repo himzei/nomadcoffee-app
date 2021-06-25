@@ -12,6 +12,7 @@ const Stack = createStackNavigator();
 
 export default function LoginNav({ screenName }) {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
+
   return (
     <Stack.Navigator headerMode="screen">
       {screenName === "Feed" ? (

@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
+import useMe from "../hooks/useMe";
 
 export default function Profile() {
   return (
@@ -7,7 +8,7 @@ export default function Profile() {
       style={{
         flex: 1,
         alignItems: "center",
-        justifyContent: "center'",
+        justifyContent: "center",
         height: 100,
       }}
     >

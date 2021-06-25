@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { FlatList } from "react-native";
 import ScreenLayout from "../components/ScreenLayout";
 import Shop from "../components/Shop";
+import useMe from "../hooks/useMe";
 
 const FEED_QUERY = gql`
   query seeCoffeeShops($lastId: Int!) {
@@ -45,6 +46,7 @@ export default function Feed() {
     setRefreshing(false);
   };
   const [refreshing, setRefreshing] = useState(false);
+
   return (
     <ScreenLayout loading={loading}>
       <FlatList

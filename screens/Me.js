@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import useMe from "../hooks/useMe";
 
 export default function Me({ navigation }) {
-  const data = useMe();
+  const { data } = useMe();
 
   useEffect(() => {
     navigation.setOptions({

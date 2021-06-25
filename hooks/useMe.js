@@ -1,10 +1,11 @@
 import { useQuery, useReactiveVar, gql } from "@apollo/client";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { isLoggedInVar, logUserOut } from "../apollo";
 
 const ME_QUERY = gql`
   query me {
     me {
+      id
       username
       avatarURL
     }
@@ -18,11 +19,12 @@ export default function useMe() {
     skip: !hasToken,
     fetchPolicy: "no-cache",
   });
+
   useEffect(() => {
     if (data?.me === null) {
       logUserOut();
     }
   }, [data]);
 
-  return data;
+  return { data };
 }
